@@ -35,3 +35,9 @@ for player 2) — same joystick-first, keyboard-fallback priority as
 in-game movement.
 
 See PLAN.md for architecture, phases, and verification gates.
+
+## License
+
+The code is released under the MIT License, see [LICENSE](LICENSE).
+
+The game's name, logo, and icons, and the original artwork and audio in this repository, are not covered by that license and remain all rights reserved. If you fork it, please give your version its own name and look.
