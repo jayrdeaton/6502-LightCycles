@@ -1,5 +1,5 @@
 ; =============================================================================
-;   game.asm — pixel-precision LightCycles game loop
+;   game.asm - pixel-precision LightCycles game loop
 ; =============================================================================
 
 .segment "CART"
@@ -216,7 +216,7 @@ StartRound:
   rts
 
 ; -----------------------------------------------------------------------------
-; DrawTitleScreen — always a full wipe and fresh redraw in the same bitmap
+; DrawTitleScreen - always a full wipe and fresh redraw in the same bitmap
 ; mode gameplay uses (never a mode switch into the Kernal's separate text
 ; console), since that mode-switch round trip is exactly what made the old
 ; text-mode title/win screens unreliable: InitVideo resets the color scheme
@@ -367,7 +367,7 @@ DrawTitleScreen:
   rts
 
 ; -----------------------------------------------------------------------------
-; DrawTitleDecoration — the title underlined in each player's trail color:
+; DrawTitleDecoration - the title underlined in each player's trail color:
 ; "LIGHT" in P1's, "CYCLES" in P2's, so the title screen reads as the same
 ; game rather than a bolted-on splash, right from the two-word split the
 ; name already has. Split into DrawP1Underline/DrawP2Underline (rather than
@@ -380,7 +380,7 @@ DrawTitleDecoration:
   jmp DrawP2Underline
 
 ; -----------------------------------------------------------------------------
-; DrawP1Underline — erases and redraws the underline beneath "LIGHT" (row
+; DrawP1Underline - erases and redraws the underline beneath "LIGHT" (row
 ; 74) in P1's trail color, with a single white lead pixel at its rightmost
 ; end, closest to P2's line, so the two read as racing toward each other
 ; across the gap between the words. White outright, not a brighter tint of
@@ -434,7 +434,7 @@ DrawP1Underline:
   rts
 
 ; -----------------------------------------------------------------------------
-; DrawP2Underline — same idea as DrawP1Underline, for the line beneath
+; DrawP2Underline - same idea as DrawP1Underline, for the line beneath
 ; "CYCLES" (row 74) in P2's trail color. Its white lead pixel is at the
 ; LEFTMOST end instead -- P2's line faces P1's across the gap, so the lead
 ; has to point the other way for the two to race toward each other rather
@@ -483,7 +483,7 @@ DrawP2Underline:
   rts
 
 ; -----------------------------------------------------------------------------
-; DrawGameOverScreen — per Jay: the win screen IS the gameplay screen, with
+; DrawGameOverScreen - per Jay: the win screen IS the gameplay screen, with
 ; the result text drawn directly on top of the frozen final trail
 ; positions. No mode switch, no full clear -- draws straight into whatever
 ; is already on the bitmap plane. A (or space) returns to the title
@@ -549,7 +549,7 @@ DrawGameOverScreen:
   rts
 
 ; -----------------------------------------------------------------------------
-; DrawModeLine — redraws only the "1P"/"2P" suffix after the static "MODE:"
+; DrawModeLine - redraws only the "1P"/"2P" suffix after the static "MODE:"
 ; label DrawTitleScreen already drew once. Erases just those 2 characters
 ; (12x7 pixels) before redrawing, not the whole line -- PixelSet only ever
 ; turns pixels on, so redrawing "2P" over "1P" without erasing first would
@@ -604,7 +604,7 @@ DrawModeLine:
   rts
 
 ; -----------------------------------------------------------------------------
-; DrawColorLines — redraws only the two color swatches (the "P1/P2 COLOR:"
+; DrawColorLines - redraws only the two color swatches (the "P1/P2 COLOR:"
 ; labels are static, drawn once by DrawTitleScreen), and the matching title
 ; underline (DrawP1Underline/DrawP2Underline), so the underline color tracks
 ; the picker live instead of only reflecting whatever it was when the title
@@ -658,20 +658,20 @@ DrawColorLines:
   rts
 
 ; -----------------------------------------------------------------------------
-; HandleColorPicker — lets each player cycle their own trail color with
+; HandleColorPicker - lets each player cycle their own trail color with
 ; LEFT/RIGHT on their own joystick, or A/D (P1) / arrow LEFT-RIGHT (P2) on
 ; the keyboard as a fallback. Reuses JOY_STATE/JOY_STATE2 and KB_DIR_P1/
 ; KB_DIR_P2 already populated this tick by PollInput/PollInputP2 (see
 ; LightCycles.asm's MainLoop) instead of re-reading hardware or re-draining
-; the keyboard — Chrin's buffer is already empty by the time this runs.
+; the keyboard - Chrin's buffer is already empty by the time this runs.
 ; Joystick-first per player: if that player's joystick shows LEFT or RIGHT
 ; this poll, the keyboard is not consulted this poll. MENU_P1_PREV/
 ; MENU_P2_PREV debounce on release exactly as before, now covering both
-; input sources — holding either (or switching between them without a
+; input sources - holding either (or switching between them without a
 ; release in between) will not repeatedly re-trigger a color change.
 ; -----------------------------------------------------------------------------
 HandleColorPicker:
-  ; P1: synthesize an effective LEFT/RIGHT byte — joystick 1 as read this
+  ; P1: synthesize an effective LEFT/RIGHT byte - joystick 1 as read this
   ; tick by PollInput's PollJoy1 call, or (only if idle on both bits) this
   ; tick's WASD result (KB_DIR_P1) from PollInput's DrainKeyboardSplit call.
   lda JOY_STATE
@@ -761,7 +761,7 @@ HandleColorPicker:
   rts
 
 ; -----------------------------------------------------------------------------
-; IncP1Color/DecP1Color/IncP2Color/DecP2Color — cycle a player's trail
+; IncP1Color/DecP1Color/IncP2Color/DecP2Color - cycle a player's trail
 ; color index, skipping past whatever the OTHER player currently has
 ; selected. Same-colored trails are only distinguishable by the head
 ; sprites (both flat white, independent of trail color), not by the
@@ -870,7 +870,7 @@ ApplySelectedTrailColors:
   rts
 
 ; -----------------------------------------------------------------------------
-; SetModeFromInput — up or down (either player) toggles GAME_MODE between
+; SetModeFromInput - up or down (either player) toggles GAME_MODE between
 ; 1P/2P, rather than a fixed up=1P/down=2P mapping. NEXT_DIR can't drive
 ; this: it's deliberately sticky for gameplay (a bike keeps its last
 ; heading even with no input), so it never goes back to "nothing pressed"
@@ -1385,7 +1385,7 @@ ComputeP2AIDirection:
   rts
 
 ; -----------------------------------------------------------------------------
-; IsDirectionSafeP2 — In: AI_DIR_TMP = candidate direction, using current
+; IsDirectionSafeP2 - In: AI_DIR_TMP = candidate direction, using current
 ; P2_X/P2_Y. Out: carry set if safe, clear if not.
 ; A candidate turn from a horizontal heading onto UP/DOWN doesn't
 ; necessarily take effect next tick the way a plain 1-step lookahead

@@ -1,5 +1,5 @@
 ; =============================================================================
-;   tiles.asm — initial tile and playfield constants for LightCycles
+;   tiles.asm - initial tile and playfield constants for LightCycles
 ; =============================================================================
 
 GRID_COLS   = 32

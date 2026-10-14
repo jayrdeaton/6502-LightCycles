@@ -1,5 +1,5 @@
 ; =============================================================================
-;   vdp.asm — TMS9918 Graphics II bitmap renderer for LightCycles
+;   vdp.asm - TMS9918 Graphics II bitmap renderer for LightCycles
 ; =============================================================================
 
 .segment "CART"
@@ -380,7 +380,7 @@ DrawBorder:
   rts
 
 ; -----------------------------------------------------------------------------
-; PixelSetP1Trail / PixelSetP2Trail — draw one trail pixel, then resolve
+; PixelSetP1Trail / PixelSetP2Trail - draw one trail pixel, then resolve
 ; that pixel's 8-wide VDP color byte by majority vote instead of generic
 ; PixelSet's first-claim-wins rule. TMS9918 Graphics II has one
 ; foreground color per 8 horizontal pixels per scanline -- when both
@@ -652,7 +652,7 @@ PixelSet:
   rts
 
 ; -----------------------------------------------------------------------------
-; PixelClear — the inverse of PixelSet: unset one pixel's bit and reset its
+; PixelClear - the inverse of PixelSet: unset one pixel's bit and reset its
 ; color-cell back to COLOR_EMPTY unconditionally (erasing always releases
 ; ownership, unlike PixelSet's first-writer-wins claim). Needed because
 ; PixelSet only ever ORs bits on -- redrawing changed text (the title
@@ -716,7 +716,7 @@ PixelClear:
   rts
 
 ; -----------------------------------------------------------------------------
-; EraseRect — clear every pixel in a rectangular region, via PixelClear.
+; EraseRect - clear every pixel in a rectangular region, via PixelClear.
 ; In: A = top row, X = left col, TEXT_ROW_I/TEXT_COL_I hold the height and
 ;     width on entry (caller sets them as byte values before calling,
 ;     reusing DrawChar's scratch since the two never run concurrently)
@@ -842,7 +842,7 @@ PixelMaskTable:
   .byte $80, $40, $20, $10, $08, $04, $02, $01
 
 ; -----------------------------------------------------------------------------
-; DrawChar — plot one character's 5x7 pixel glyph into the bitmap plane.
+; DrawChar - plot one character's 5x7 pixel glyph into the bitmap plane.
 ; In:  A = ASCII character code (space through 'Z'; anything outside that
 ;      range draws nothing, since no game text uses it)
 ;      TEXT_ROW/TEXT_COL = top-left pixel origin, TEXT_COLOR = TMS_* color
@@ -922,7 +922,7 @@ FontBitMask:
   .byte $01, $02, $04, $08, $10, $20, $40
 
 ; -----------------------------------------------------------------------------
-; DrawText — plot a null-terminated string, one glyph every 6 pixels (5 wide
+; DrawText - plot a null-terminated string, one glyph every 6 pixels (5 wide
 ; plus 1 blank column of spacing).
 ; In:  TEXT_STR_PTR = string pointer, TEXT_ROW/TEXT_COL = origin, TEXT_COLOR
 ;      Deliberately NOT WORK_PTR -- DrawChar calls down into PixelSet /
@@ -949,7 +949,7 @@ DrawText:
   rts
 
 ; -----------------------------------------------------------------------------
-; DrawCharBig — like DrawChar, but each font pixel becomes a 2x2 block
+; DrawCharBig - like DrawChar, but each font pixel becomes a 2x2 block
 ; (10x14 pixels per glyph instead of 5x7), for a title that reads as an
 ; actual title instead of just another line of body text. Reuses FontData
 ; as-is rather than needing a second, separately-authored big font.
@@ -1049,7 +1049,7 @@ DrawCharBig:
   rts
 
 ; -----------------------------------------------------------------------------
-; DrawTextBig — DrawText's counterpart for DrawCharBig: one glyph every 12
+; DrawTextBig - DrawText's counterpart for DrawCharBig: one glyph every 12
 ; pixels (10 wide plus 2 blank columns of spacing) instead of 6.
 ; In:  TEXT_STR_PTR = string pointer, TEXT_ROW/TEXT_COL = origin, TEXT_COLOR
 ; Out: TEXT_COL is left just past the string's last character
@@ -1071,7 +1071,7 @@ DrawTextBig:
   rts
 
 ; -----------------------------------------------------------------------------
-; DrawColorSwatch — fill a small 7x7 pixel block with a solid color, used to
+; DrawColorSwatch - fill a small 7x7 pixel block with a solid color, used to
 ; preview a player's selected trail color on the title screen. 7px to match
 ; the font's own glyph height, so the swatch reads as sitting on the same
 ; line as the "P1:"/"P2:" text instead of an arbitrary size. Reuses
@@ -1113,7 +1113,7 @@ DrawColorSwatch:
   rts
 
 ; -----------------------------------------------------------------------------
-; DrawUpTriangle / DrawDownTriangle — a small 5x3 "you can go this way"
+; DrawUpTriangle / DrawDownTriangle - a small 5x3 "you can go this way"
 ; affordance. The color swatches already have an accurate hint in their
 ; left/right chevrons, since they really are a left/right control; MODE
 ; is a up/down control, so it gets a matching up/down shape instead of
@@ -1287,7 +1287,7 @@ DrawDownTriangle:
   rts
 
 ; -----------------------------------------------------------------------------
-; DrawLeftTriangle / DrawRightTriangle — a small 3x5 "you can go this way"
+; DrawLeftTriangle / DrawRightTriangle - a small 3x5 "you can go this way"
 ; affordance, the same design language as DrawUpTriangle/DrawDownTriangle
 ; (a solid filled arrowhead coming to a single-pixel point, not the font's
 ; thin </> glyphs) rotated 90 degrees, for a left/right control -- the

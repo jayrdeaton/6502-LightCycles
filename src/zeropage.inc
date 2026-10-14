@@ -1,5 +1,5 @@
 ; =============================================================================
-;   zeropage.inc — initial zero-page layout for LightCycles
+;   zeropage.inc - initial zero-page layout for LightCycles
 ; =============================================================================
 
 STATE_TITLE     = 0
@@ -70,11 +70,11 @@ MENU_P2_PREV    := $67
 KB_DIR_P1       := $68   ; DrainKeyboardSplit output: WASD direction (P1)
 KB_DIR_P2       := $69   ; DrainKeyboardSplit output: arrow-key direction (P2)
 KB_FIRE         := $6A   ; DrainKeyboardSplit output: 1 if either fire key seen
-                          ; this call — the byte LightCycles actually reads,
+                          ; this call - the byte LightCycles actually reads,
                           ; since START/pause is one shared action here, not
                           ; per-player
 PICKER_TMP      := $6B   ; HandleColorPicker scratch: effective LEFT/RIGHT byte
-KB_DIR          := $6C   ; unused output of DrainKeyboardCombined — LightCycles
+KB_DIR          := $6C   ; unused output of DrainKeyboardCombined - LightCycles
                           ; calls DrainKeyboardSplit, not Combined, but the
                           ; library assembles as one unit so KB_DIR must still
                           ; resolve to something

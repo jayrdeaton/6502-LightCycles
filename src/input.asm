@@ -1,5 +1,5 @@
 ; =============================================================================
-;   input.asm — LightCycles input shim using 6502-Lib polling
+;   input.asm - LightCycles input shim using 6502-Lib polling
 ; =============================================================================
 ;   Joystick-first, keyboard-fallback: PollInput (P1) and PollInputP2 each
 ;   poll their own joystick port via 6502-Lib's PollJoy1/PollJoy2, and fall
@@ -10,9 +10,9 @@
 ;   so PollInputP2 reuses the same drain window's KB_DIR_P2 result instead
 ;   of re-draining an already-empty Chrin buffer.
 ;
-;   A bike always advances forward every tick regardless of input — turning
+;   A bike always advances forward every tick regardless of input - turning
 ;   is a discrete heading change, not something that needs to be held to
-;   keep moving — so unlike Pong's paddles, no hold/decay layer is needed
+;   keep moving - so unlike Pong's paddles, no hold/decay layer is needed
 ;   here: DrainKeyboardSplit's per-tick "last direction seen" result is the
 ;   same sticky-until-changed semantics the joystick-only code already had.
 ; =============================================================================
@@ -21,7 +21,7 @@
 .include "../../6502-Lib/core/input.asm"
 
 ; -----------------------------------------------------------------------------
-; PollInput — P1: joystick 1 first, WASD fallback when idle. Also drains
+; PollInput - P1: joystick 1 first, WASD fallback when idle. Also drains
 ; the keyboard (once, for both players) and ORs joystick A / space into
 ; START_PRESSED, independent of the direction priority.
 ; -----------------------------------------------------------------------------
@@ -69,7 +69,7 @@ PollInput:
 	sta NEXT_DIR
 @doneDir:
 
-	; Fire/A: OR'd independently of direction priority — joystick A held
+	; Fire/A: OR'd independently of direction priority - joystick A held
 	; OR keyboard space seen this drain, either sets START_PRESSED.
 	lda JOY_STATE
 	and #JOY_A
@@ -97,7 +97,7 @@ PollInput:
 	rts
 
 ; -----------------------------------------------------------------------------
-; PollInputP2 — P2: joystick 2 first, arrow-key fallback when idle. Always
+; PollInputP2 - P2: joystick 2 first, arrow-key fallback when idle. Always
 ; polled, regardless of GAME_MODE -- this used to be gated on
 ; GAME_MODE == MODE_2P (skip reading a controller nothing in 1P mode would
 ; use), but that gate ran on the title screen too, where GAME_MODE reflects

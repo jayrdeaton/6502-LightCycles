@@ -1,5 +1,5 @@
 ; =============================================================================
-;   rng.asm — local bootstrap RNG (to be replaced by 6502-Lib include)
+;   rng.asm - local bootstrap RNG (to be replaced by 6502-Lib include)
 ; =============================================================================
 
 .segment "CART"

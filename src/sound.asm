@@ -1,5 +1,5 @@
 ; =============================================================================
-;   sound.asm — sound hook skeleton for LightCycles
+;   sound.asm - sound hook skeleton for LightCycles
 ; =============================================================================
 
 .segment "CART"

@@ -1,5 +1,5 @@
 ; =============================================================================
-;   LightCycles.asm — cartridge entry point and main loop skeleton
+;   LightCycles.asm - cartridge entry point and main loop skeleton
 ; =============================================================================
 
 .setcpu "65C02"
