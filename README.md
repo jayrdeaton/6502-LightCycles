@@ -26,12 +26,12 @@ cluster, so the two players' hands don't collide.
 
 A bike always advances forward every tick; turning only changes its
 heading, so unlike Pong's paddles there's no need to hold a direction to
-keep moving — the last direction pressed sticks until changed again.
+keep moving: the last direction pressed sticks until changed again.
 
 On the title screen, player 1's Up/Down (joystick or W/S) picks one-player
 or two-player mode, and each player independently cycles their own trail
 color with Left/Right (joystick, or A/D for player 1 and the arrow keys
-for player 2) — same joystick-first, keyboard-fallback priority as
+for player 2): same joystick-first, keyboard-fallback priority as
 in-game movement.
 
 See PLAN.md for architecture, phases, and verification gates.
